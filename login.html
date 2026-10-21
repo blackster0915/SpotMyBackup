@@ -10,10 +10,18 @@
 
 			window.onload = function() {
 				var target = window.self === window.top ? window.opener : window.parent;
-				var hash = window.location.hash;
-				if (hash) {
-				    var token = window.location.hash.split('&')[0].split('=')[1];
-				    target.postMessage(token, conf.uri); //embedded
+				var params = new URLSearchParams(window.location.search);
+				if (params.has('code') || params.has('error')) {
+				    var result = { code: params.get('code'), state: params.get('state'), error: params.get('error') };
+				    // Spotify's login page can cut the link to window.opener, so also hand the result over via localStorage
+				    try {
+				        localStorage.setItem('spotmybackup_auth', JSON.stringify(result));
+				    } catch (e) {}
+				    if (target) {
+				        target.postMessage(result, conf.uri); //embedded
+				    }
+				    document.body.innerHTML = 'Login finished, you can close this window.';
+				    window.close();
 				}
 			}
 		</script>

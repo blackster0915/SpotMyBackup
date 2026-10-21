@@ -1,0 +1,5 @@
+# your own settings with your Spotify Client ID, created from config.example.json
+config.json
+
+# exported backups (named <user>@<date>.json) contain your library
+*@*.json

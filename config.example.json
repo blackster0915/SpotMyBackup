@@ -1,0 +1,7 @@
+config = {
+"uri":"http://127.0.0.1:8888",
+"redirect_uri":"http://127.0.0.1:8888/login.html",
+"client_id":"[YOUR_CLIENT_ID_HERE]",
+"slowdown_import": 100,
+"slowdown_export": 100
+};
